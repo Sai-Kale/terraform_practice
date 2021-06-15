@@ -23,7 +23,10 @@ resource "aws_iam_policy" "devops_policy" {
   name        = "devops_policy"
   description = "An test Admin policy"
   policy      = "${file("policy.json")}" #giving admin policy
-}
+  #policy = "${data.template_file.policy.rendered}"      #if we have vars like bucket names in json policy document
+   #policy = data.file.sample_policy.json         #applying direct sample_policiy from data.tf file if any
+  }
+
 
 #Attaching the policy to DevOps group
 resource "aws_iam_group_policy_attachment" "test-attach" {
