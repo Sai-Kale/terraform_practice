@@ -1,11 +1,16 @@
-'use strict'
-exports.handler = function (event, context, callback) {
-  var response = {
-    statusCode: 200,
-    headers: {
-      'Content-Type': 'text/html; charset=utf-8',
-    },
-    body: '<h2>This is our Lambda...API Gateway.&& Terraform lab.</h2>',
-  }
-  callback(null, response)
-}
+console.log('Loading function');
+
+exports.handler = (event, context, callback) => {
+    console.log('Received event:',
+        JSON.stringify(event, null, 2));
+    console.log('name =', event.name);
+    var name = '';
+    if ('name' in event) {
+        name = event['name'];
+    } else {
+        name = "Pritam";
+    }
+    var greetings = 'Hello ' + name + '!';
+    console.log(greetings);
+    callback(null, greetings);
+};
